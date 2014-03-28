@@ -1,6 +1,7 @@
 package Lesson2.HW.CustomSet;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,22 +20,32 @@ interface Container<T>{
 
 public class Main {
     public static void main(String[] args) {
-		CustomSet<Integer> set = new CustomSet<Integer>(new CustomArrayList<Integer>());
+		System.out.println("==== CustomArrayList section ====");
+		CustomSet<Integer> setOnArrayList = new CustomSet<Integer>(new CustomArrayList<Integer>());
 		for (int i = 0; i < 5; i++){
-			set.add((int)(Math.random() * 11));
+			setOnArrayList.add((int) (Math.random() * 11));
 		}
-		set.showAllElements();
+		setOnArrayList.showAllElements();
+		setOnArrayList.remove(0);
+		setOnArrayList.remove(setOnArrayList.size() - 1);
+		setOnArrayList.showAllElements();
+		setOnArrayList.add(setOnArrayList.get(setOnArrayList.size() - 1));
+		setOnArrayList.showAllElements();
+		System.out.println("Contains 5 ? - " + setOnArrayList.contains(5));
 
-		set.remove(0);
-		set.remove(set.size() - 1);
+		System.out.println("==== CustomLinkedList section ====");
+		CustomSet<Integer> setOnLinked = new CustomSet<Integer>(new CustomLinkedList<Integer>());
+		for (int i = 0; i < 5; i++){
+			setOnLinked.add((int) (Math.random() * 11));
+		}
+		setOnLinked.showAllElements();
+		setOnLinked.remove(0);
+		setOnLinked.remove(setOnLinked.size() - 1);
+		setOnLinked.showAllElements();
+		setOnLinked.add(setOnLinked.get(setOnLinked.size() - 1));
+		setOnLinked.showAllElements();
+		System.out.println("Contains 5 ? - " + setOnLinked.contains(5));
 
-		set.showAllElements();
-
-		set.add(set.get(set.size() - 1));
-
-		set.showAllElements();
-
-		System.out.println("Contains 5 ? - " + set.contains(5));
 	}
 }
 
@@ -102,31 +113,31 @@ class CustomArrayList<T> extends ArrayList<T> implements Container<T>{
 	}
 }
 
-/*
 class CustomLinkedList<T> extends LinkedList<T> implements Container<T>{
+	private LinkedList<T> list = new LinkedList<T>();
 
 	@Override
 	public void performPut(T element) {
-		//Implemented
+		list.add(element);
 	}
 
 	@Override
 	public T performGet(int index) {
-		return null;  //Implemented
+		return list.get(index);
 	}
 
 	@Override
 	public void performRemove(int index) {
-		//Implemented
+		list.remove(index);
 	}
 
 	@Override
 	public boolean performContains(T element) {
-		return false;  //Implemented
+		return list.contains(element);
 	}
 
 	@Override
 	public int getSize() {
-		return 0;  //Implemented
+		return list.size();
 	}
-}*/
+}
