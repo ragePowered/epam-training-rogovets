@@ -10,6 +10,11 @@ import java.util.LinkedList;
  * Time: 11:58 PM
  */
 
+/**
+ * Написать максимально расширяемый проект множество Set(множество может содержать различные типы,
+ * может быть реализовано на базе списка, массива и т.д.)
+ * */
+
 interface Container<T>{
     public void performPut(T element);
     public T performGet(int index);
