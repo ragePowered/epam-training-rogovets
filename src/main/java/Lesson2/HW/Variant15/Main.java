@@ -23,7 +23,7 @@ package Lesson2.HW.Variant15;
 
  public class Main {
 	public static void main(String[] args) {
-		DiagonalSort matrix = new DiagonalSort(20);
+		DiagonalSort matrix = new DiagonalSort(3);
 		System.out.println("Before");
 		matrix.show();
 		matrix.buildDiagonal();
@@ -59,24 +59,24 @@ class DiagonalSort {
 		}
 	}
 
-//	private void showUsed(int value){
-//		for (int i = 0; i < matrix.length; i++){
-//			System.out.print(" ");
-//			for (int j = 0; j < matrix[i].length; j++){
-//				if (isUsed[i][j])
-//					System.out.print("*" + matrix[i][j] + " ");
-//				else
-//					System.out.print(" " + matrix[i][j] + " ");
-//			}
-//			if (i == (matrix[i].length / 2))
-//				System.out.print("\t" + value);
-//			System.out.println();
-//		}
-//	}
+	private void showUsed(int value){
+		for (int i = 0; i < matrix.length; i++){
+			System.out.print(" ");
+			for (int j = 0; j < matrix[i].length; j++){
+				if (isUsed[i][j])
+					System.out.print("*" + matrix[i][j] + " ");
+				else
+					System.out.print(" " + matrix[i][j] + " ");
+			}
+			if (i == (matrix[i].length / 2))
+				System.out.print("\t" + value);
+			System.out.println();
+		}
+	}
 
 	public void buildDiagonal(){
 
-//		System.out.println("\nSearching");
+		System.out.println("\nSearching");
 
 		Index anyNotUsed;
 		for (int pass = 0; pass < indexes.length; pass++){
@@ -95,18 +95,18 @@ class DiagonalSort {
 			}
 			isUsed[indexes[pass].getI()][indexes[pass].getJ()] = true;
 
-//			System.out.println("--------------");
-//			showUsed(matrix[indexes[pass].getI()][indexes[pass].getJ()]);
+			System.out.println("--------------");
+			showUsed(matrix[indexes[pass].getI()][indexes[pass].getJ()]);
 
 		}
 
-//		System.out.println("\nManipulating");
+		System.out.println("\nManipulating");
 
 		for (int pass = 0; pass < indexes.length; pass++){
 			swap(indexes[pass].getI(), indexes[pass].getJ(), pass, pass);
 
-//			System.out.println("--------------");
-//			showUsed(matrix[indexes[pass].getI()][indexes[pass].getJ()]);
+			System.out.println("--------------");
+			showUsed(matrix[indexes[pass].getI()][indexes[pass].getJ()]);
 
 		}
 
