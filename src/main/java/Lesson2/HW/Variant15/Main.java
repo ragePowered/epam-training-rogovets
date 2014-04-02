@@ -33,7 +33,7 @@ package Lesson2.HW.Variant15;
 }
 
 class DiagonalSort {
-	private int[][] matrix;			// Власне матриця
+	private int[][] matrix;
 	private boolean[][] isUsed;
 	Index[] indexes;
 
