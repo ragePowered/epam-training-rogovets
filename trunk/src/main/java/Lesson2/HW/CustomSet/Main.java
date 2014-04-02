@@ -19,7 +19,7 @@ interface Container<T>{
     public void performPut(T element);
     public T performGet(int index);
     public void performRemove(int index);
-    public boolean performContains(T element);
+    public boolean checkContains(T element);
     public int getSize();
 }
 
@@ -57,12 +57,57 @@ public class Main {
 class CustomSet<T>{
     private Container<T> container;
 
+	public CustomSet<T> unite(CustomSet<T> that){
+		CustomSet<T> resultSet = new CustomSet<T>(this.container);
+		for (int i = 0; i < this.size(); i++){
+			if (!resultSet.contains(this.get(i))){
+				resultSet.add(this.get(i));
+			}
+		}
+		for (int i = 0; i < that.size(); i++){
+			if (!resultSet.contains(that.get(i))){
+				resultSet.add(that.get(i));
+			}
+		}
+		return resultSet;
+	}
+
+	public CustomSet<T> section(CustomSet<T> that){
+		CustomSet<T> resultSet = new CustomSet<T>(this.container);
+		int smallerSetSize = (this.size() < that.size()) ? (this.size()) : (that.size());
+		for (int i = 0; i < smallerSetSize; i++){
+			if (!that.contains(this.get(i))){
+				resultSet.add(this.get(i));
+			}
+		}
+		return resultSet;
+	}
+
+	public CustomSet<T> symmetricSection(CustomSet<T> that){
+		CustomSet<T> resultSet = new CustomSet<T>(this.container);
+		int smallerSetSize = (this.size() < that.size()) ? (this.size()) : (that.size());
+
+		for (int i = 0; i < this.size(); i ++){
+			if (!that.contains(this.get(i))){
+				resultSet.add(this.get(i));
+			}
+		}
+		for (int i = 0; i < that.size(); i ++){
+			if (!this.contains(that.get(i))){
+				resultSet.add(this.get(i));
+			}
+		}
+		return resultSet;
+	}
+
     CustomSet(Container<T> container) {
         this.container = container;
     }
 
     public void add(T element){
-        this.container.performPut(element);
+		if (!this.contains(element)){
+			this.container.performPut(element);
+		}
     }
 
     public T get(int index){
@@ -74,7 +119,7 @@ class CustomSet<T>{
 	}
 
 	public boolean contains(T element){
-		return this.container.performContains(element);
+		return this.container.checkContains(element);
 	}
 
 	public int size(){
@@ -108,7 +153,7 @@ class CustomArrayList<T> extends ArrayList<T> implements Container<T>{
 	}
 
 	@Override
-	public boolean performContains(T element) {
+	public boolean checkContains(T element) {
 		return list.contains(element);
 	}
 
@@ -137,7 +182,7 @@ class CustomLinkedList<T> extends LinkedList<T> implements Container<T>{
 	}
 
 	@Override
-	public boolean performContains(T element) {
+	public boolean checkContains(T element) {
 		return list.contains(element);
 	}
 
