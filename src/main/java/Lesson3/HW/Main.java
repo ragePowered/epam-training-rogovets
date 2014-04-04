@@ -20,58 +20,129 @@ import java.util.ArrayList;
 
 public class Main {
 	public static void main(String[] args) {
-		House myHouse = new House();
-		myHouse.addDoor();
-		myHouse.addDoor();
-		myHouse.addWindow();
-		myHouse.addWindow();
-		myHouse.addWindow();
+		Door mainDoor = new Door("Main door");
+		Door kitchenDoor = new Door("Kitchen door");
+
+		Window smallWindow = new Window("Small");
+		Window largeWindow = new Window("Large");
+
+		House myHouse = new House("my house");
+		myHouse.addDoor(mainDoor);
+		myHouse.addDoor(kitchenDoor);
+		myHouse.addWindow(largeWindow);
+		myHouse.addWindow(largeWindow);
+		myHouse.addWindow(smallWindow);
+
+		House mySecondHouse = new House("my second house");
+		mySecondHouse.addDoor(mainDoor);
+		mySecondHouse.addDoor(kitchenDoor);
+		mySecondHouse.addWindow(largeWindow);
+		mySecondHouse.addWindow(largeWindow);
+		mySecondHouse.addWindow(smallWindow);
+
+		myHouse.getWindowsNumber();
+		mySecondHouse.getWindowsNumber();
+		myHouse.getDoorsCounter();
+		mySecondHouse.getDoorsCounter();
+
+		System.out.println("My house is equals to my second house? - " + myHouse.equals(mySecondHouse));
+
 		myHouse.lock();
-		System.out.println("There is " + Window.getWindowsNumer() + " windows");
-		System.out.println("There is " + Door.getDoorsNumber() + " doors");
 	}
 }
 
 class House{
 	private ArrayList<Window> windows = new ArrayList<Window>();
 	private ArrayList<Door> doors = new ArrayList<Door>();
+	private String name;
+
+	House(String name) {
+		this.name = name;
+	}
 
 	public void lock(){
 		System.out.println("House is locked!");
 	}
 
-	public void addWindow(){
-		windows.add(new Window());
+	public void addWindow(Window window){
+		windows.add(window);
 		System.out.println("Window added!");
 	}
 
-	public void addDoor(){
-		doors.add(new Door());
+	public void addDoor(Door door){
+		doors.add(door);
 		System.out.println("Door added");
 	}
 
+	public void getWindowsNumber(){
+		System.out.println("There is " + this.windows.size() + " windows in " + this.name);
+	}
+
+	public void getDoorsCounter(){
+		System.out.println("There is " + this.doors.size() + " doors in " + this.name);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof House)) return false;
+
+		House house = (House) o;
+
+		return doors.equals(house.doors) && windows.equals(house.windows);
+
+	}
+
+	@Override
+	public int hashCode() {
+		int result = windows.hashCode();
+		result = 31 * result + doors.hashCode();
+		return result;
+	}
 }
 
 class Window{
-	private static int windowsCounter;
+	private String size;
 
-	Window() {
-		windowsCounter++;
+	Window(String size) {
+		this.size = size;
 	}
 
-	public static int getWindowsNumer(){
-		return windowsCounter;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Window)) return false;
+
+		Window window = (Window) o;
+
+		return size.equals(window.size);
+	}
+
+	@Override
+	public int hashCode() {
+		return size.hashCode();
 	}
 }
 
 class Door{
-	private static int doorsCounter;
+	private String location;
 
-	Door() {
-		doorsCounter++;
+	Door(String location) {
+		this.location = location;
 	}
 
-	public static int getDoorsNumber(){
-		return doorsCounter;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Door)) return false;
+
+		Door door = (Door) o;
+
+		return location.equals(door.location);
+	}
+
+	@Override
+	public int hashCode() {
+		return location.hashCode();
 	}
 }
