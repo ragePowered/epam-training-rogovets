@@ -7,57 +7,71 @@ package Lesson3.HW;
  * Time: 12:48 AM
  */
 
+import java.util.ArrayList;
+
 /**
  * Создать приложение, удовлетворяющее требованиям, приведенным в задании.
  * Аргументировать принадлежность классу каждого создаваемого метода и корректно
  * переопределить для каждого класса методы equals(), hashCode(), toString().
  *
- * Создать объект класса Самолет, используя класс Крыло.
- * Методы: летать, задавать маршрут, вывести на консоль маршрут.
- *
+ * Создать объект класса Дом, используя классы Окно, Дверь.
+ * Методы: закрыть на ключ, вывести на консоль количество окон, дверей.
  */
 
 public class Main {
 	public static void main(String[] args) {
-		Airplane plane = new Airplane(new NormalWing());
-		plane.wing.fly();
-		plane.specifyRoute();
-		plane.showRoute();
+		House myHouse = new House();
+		myHouse.addDoor();
+		myHouse.addDoor();
+		myHouse.addWindow();
+		myHouse.addWindow();
+		myHouse.addWindow();
+		myHouse.lock();
+		System.out.println("There is " + Window.getWindowsNumer() + " windows");
+		System.out.println("There is " + Door.getDoorsNumber() + " doors");
 	}
 }
 
-class Airplane{
-	Wing wing;
+class House{
+	private ArrayList<Window> windows = new ArrayList<Window>();
+	private ArrayList<Door> doors = new ArrayList<Door>();
 
-	Airplane(Wing wing) {
-		this.wing = wing;
+	public void lock(){
+		System.out.println("House is locked!");
 	}
 
-	public void setWing(Wing wing) {
-		this.wing = wing;
+	public void addWindow(){
+		windows.add(new Window());
+		System.out.println("Window added!");
 	}
 
-	public void specifyRoute(){
-		System.out.println("Route confirmed");
+	public void addDoor(){
+		doors.add(new Door());
+		System.out.println("Door added");
 	}
 
-	public void showRoute(){
-		System.out.println("My route is: Kiev - Istanbul");
+}
+
+class Window{
+	private static int windowsCounter;
+
+	Window() {
+		windowsCounter++;
+	}
+
+	public static int getWindowsNumer(){
+		return windowsCounter;
 	}
 }
 
-interface Wing{
-	public void fly();
-}
+class Door{
+	private static int doorsCounter;
 
-class NormalWing implements Wing{
-	public void fly(){
-		System.out.println("I can fly!");
+	Door() {
+		doorsCounter++;
 	}
-}
 
-class BrokenWing implements Wing{
-	public void fly(){
-		System.out.println("I can'T fly!");
+	public static int getDoorsNumber(){
+		return doorsCounter;
 	}
 }
