@@ -89,8 +89,10 @@ class House{
 
 		House house = (House) o;
 
-		return doors.equals(house.doors) && windows.equals(house.windows);
+		if (!doors.equals(house.doors)) return false;
+		if (!windows.equals(house.windows)) return false;
 
+		return true;
 	}
 
 	@Override
@@ -98,6 +100,15 @@ class House{
 		int result = windows.hashCode();
 		result = 31 * result + doors.hashCode();
 		return result;
+	}
+
+	@Override
+	public String toString() {
+		return "House{" +
+				"windows=" + windows +
+				", doors=" + doors +
+				", name='" + name + '\'' +
+				'}';
 	}
 }
 
@@ -122,6 +133,13 @@ class Window{
 	public int hashCode() {
 		return size.hashCode();
 	}
+
+	@Override
+	public String toString() {
+		return "Window{" +
+				"size='" + size + '\'' +
+				'}';
+	}
 }
 
 class Door{
@@ -144,5 +162,12 @@ class Door{
 	@Override
 	public int hashCode() {
 		return location.hashCode();
+	}
+
+	@Override
+	public String toString() {
+		return "Door{" +
+				"location='" + location + '\'' +
+				'}';
 	}
 }
