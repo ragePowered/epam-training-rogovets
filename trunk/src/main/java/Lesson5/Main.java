@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
 
 public class Main {
 	public static void main(String[] args) {
-		B pb = (int i) -> System.out.println("Lambda test " + i);
+		B pb = C::g;
 
 		Method[] methods = pb.getClass().getDeclaredMethods();
 		for (Method each : methods){
@@ -23,4 +23,10 @@ public class Main {
 @FunctionalInterface
 interface B{
 	void g(int i);
+}
+
+class C{
+	static void g(int i){
+
+	}
 }

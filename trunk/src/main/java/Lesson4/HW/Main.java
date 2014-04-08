@@ -39,8 +39,8 @@ public class Main {
 }
 
 class HousingUtilities{
-	private ArrayList<Request> workplan = new ArrayList<Request>();
-	private HashMap<Brigade, Request> brigadesMap = new HashMap<Brigade, Request>();
+	private ArrayList<Request> workplan = new ArrayList<>();
+	private HashMap<Brigade, Request> brigadesMap = new HashMap<>();
 
 	public void addRequestToWorkPlan(Request request){
 		workplan.add(request);
@@ -55,7 +55,6 @@ class HousingUtilities{
 	public void finishWorkPlan(){
 		while (workplan.size() > 0){
 			if (assignRequestToBrigade(workplan.get(workplan.size() - 1))){
-				System.out.println("Brigade on the way");
 				workplan.remove(workplan.size() - 1);
 				System.out.println("Workplan shrinked!");
 			} else {
@@ -70,6 +69,7 @@ class HousingUtilities{
 		for (Map.Entry each : brigadesMap.entrySet()){
 			if (each.getValue() == null){
 				each.setValue(request);
+				System.out.println(each.getKey() + " on the way");
 				return true;
 			}
 		}
@@ -118,9 +118,6 @@ class Lodger{
 
 	public String getName() {
 		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	@Override
@@ -212,8 +209,6 @@ class Brigade{
 
 	@Override
 	public String toString() {
-		return "Brigade{" +
-				"name='" + name + '\'' +
-				'}';
+		return name;
 	}
 }
