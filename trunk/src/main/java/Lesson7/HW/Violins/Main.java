@@ -11,8 +11,10 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * Есть 2 скрипача, скрипока и смычок. Смоделировать Deadlock и разрешить его
- * стандартными средствами Java 1.4
+ * Запрограммировать задачу о скрипачах. Есть m скрипачей, n скрипок и k
+ * смычков. Скрипачи играют по очереди, для того, чтобы скрипачу сыграть на
+ * скрипке ему нужна скрипка и смычок. Есть три очереди: очередь скрипачей
+ * скрипок и смычков.
  */
 
 public class Main {
@@ -47,6 +49,7 @@ public class Main {
 			Bow bow;
 			int i = 0;
 			while (i < 3){
+				i++;
 				synchronized (violins){
 					if ((violin = violins.poll()) != null){
 						System.out.println(getName() + " got " + violin);
@@ -64,15 +67,11 @@ public class Main {
 
 				synchronized (bows){
 					if ((bow = bows.poll()) != null){
-
 						System.out.println(getName() + " got " + bow);
-
 						if (violin != null){
 							System.out.println(getName() + " playing Beethoven on " + violin + " and " + bow);
 						}
-
 					} else {
-
 						System.out.println(getName() + " waiting for BOW");
 						try {
 							currentThread().join(600);
@@ -91,10 +90,7 @@ public class Main {
 					violins.offer(violin);
 					violin = null;
 				}
-
-				i++;
 			}
-
 		}
 	}
 
