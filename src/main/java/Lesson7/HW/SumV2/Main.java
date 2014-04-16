@@ -43,7 +43,7 @@ class Calculator{
 		} catch (ExecutionException e) {e.printStackTrace();
 		}
 		service.shutdown();
-		System.out.println(result);
+		System.out.println("Result is " + result);
 	}
 }
 
@@ -62,6 +62,7 @@ class Worker implements Callable<Integer>{
 		for (int i = id * quantum; i < (id + 1) * quantum; i++){
 			result += i;
 		}
+		System.out.println(Thread.currentThread().getName() + " - " + result);
 		return result;
 	}
 }
