@@ -21,20 +21,20 @@ public class Main {
 	private static volatile Queue<Violin> violins = new LinkedList<>();
 	private static volatile Queue<Bow> bows = new LinkedList<>();
 
+
 	static {
-		for (int i = 0; i < 3; i++){
+		for (int i = 0; i < 1; i++){
 			violins.add(new Violin(i+1));
 		}
-		for (int i = 0; i < 2; i++){
+		for (int i = 0; i < 1; i++){
 			bows.add(new Bow(i+1));
 		}
 	}
 
 	public static void main(String[] args) {
-		new Violinist("Andrew").start();
-		new Violinist("Boriss").start();
-		new Violinist("Sergii").start();
-		new Violinist("Alexey").start();
+		for (int i = 1; i <= 100; i++){
+			new Violinist("#" + i).start();
+		}
 	}
 
 	private static class Violinist extends Thread{
@@ -47,58 +47,37 @@ public class Main {
 		public void run() {
 			Violin violin;
 			Bow bow;
-			int i = 0;
-			while (i < 3){
-				i++;
-				synchronized (violins){
-					if ((violin = violins.poll()) != null){
-						System.out.println(getName() + " got " + violin);
-					} else {
-						System.out.println(getName() + " waiting for VIOLIN");
-						try {
-							currentThread().join(600);
-						} catch (InterruptedException e) {
-							e.printStackTrace();  //Exception here
-						}
+
+			violin = violins.poll();
+			if (violin != null){
+				System.out.println(getName() + ": got violin. Trying to take bow");
+				bow = bows.poll();
+				if (bow != null){
+
+					System.out.println(getName() + ": got violin and bow! Playing Beethoven");
+
+					violins.add(violin);
+					synchronized (violins){ violins.notifyAll(); }
+					bows.add(bow);
+					synchronized (bows){ bows.notifyAll();}
+
+				} else {
+
+					violins.add(violin);
+					synchronized (violins){ violins.notifyAll(); }
+
+					System.out.println(getName() + ": no bows! Returning captured violin");
+					synchronized (bows){
+						try { bows.wait(); } catch (InterruptedException e) { e.printStackTrace(); }
 					}
 				}
 
-				sleepTime();
-
-				synchronized (bows){
-					if ((bow = bows.poll()) != null){
-						System.out.println(getName() + " got " + bow);
-						if (violin != null){
-							System.out.println(getName() + " playing Beethoven on " + violin + " and " + bow);
-						}
-					} else {
-						System.out.println(getName() + " waiting for BOW");
-						try {
-							currentThread().join(600);
-						} catch (InterruptedException e) {
-							e.printStackTrace();  //Exception here
-						}
-					}
-				}
-
-				if (bow != null) {
-					bows.offer(bow);
-					bow = null;
-				}
-
-				if (violin != null) {
-					violins.offer(violin);
-					violin = null;
+			} else {
+				System.out.println(getName() + ": no violins!");
+				synchronized (violins) {
+					try { violins.wait(); } catch (InterruptedException e) { e.printStackTrace(); }
 				}
 			}
-		}
-	}
-
-	private static void sleepTime(){
-		try {
-			Thread.sleep((int)(Math.random() * 751 + 250));
-		} catch (InterruptedException e) {
-			e.printStackTrace();  //Exception here
 		}
 	}
 }
@@ -108,10 +87,6 @@ class Violin{
 
 	Violin(Integer id) {
 		this.id = id;
-	}
-
-	public Integer getId() {
-		return id;
 	}
 
 	@Override
@@ -125,10 +100,6 @@ class Bow{
 
 	Bow(Integer id) {
 		this.id = id;
-	}
-
-	public Integer getId() {
-		return id;
 	}
 
 	@Override
