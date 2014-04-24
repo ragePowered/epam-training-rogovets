@@ -38,7 +38,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		Dijkstra.calculate(n1);
-		List<Dijkstra.Node> path = Dijkstra.getShortestPathTo(n6);
+		List<Dijkstra.Node> path = Dijkstra.getShortestPathTo(n5);
 
 		for (Dijkstra.Node each : path){
 //			System.out.println("#" + each.getId() + " (" + each.getMinimumWeight() + ") ");
