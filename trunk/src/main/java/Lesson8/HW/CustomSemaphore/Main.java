@@ -1,5 +1,7 @@
 package Lesson8.HW.CustomSemaphore;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 
 /**
@@ -27,7 +29,7 @@ public class Main {
 
 				try
 				{
-					available.acquire();
+					available.acquire(this);
 
 					System.out.println("Executing " +
 							"long-running action for " +
@@ -54,30 +56,35 @@ public class Main {
 
 class CustomSemaphore {
 	private volatile int permits;
+	private volatile Queue<Object> queue = new LinkedList<>();
 
 	CustomSemaphore(int permits) {
 		if (permits >= 0) this.permits = permits;
 		else throw new IllegalArgumentException();
 	}
 
-	public synchronized void acquire(){
-		--this.permits;
-		if (this.permits < 0)
-			waitOnThis();
+	public void acquire(Object synchronizer){
+		queue.add(synchronizer);
+		synchronized (synchronizer) {
+			--this.permits;
+			if (this.permits < 0){
+				try {
+					synchronizer.wait();
+				} catch (InterruptedException e) { e.printStackTrace(); }
+			}
+		}
+
 	}
 
-	public synchronized void release(){
+	public void release(){
+		Object fromQueue;
 		++this.permits;
-		if (this.permits <= 0)
-			notify();
-	}
-
-	private void waitOnThis(){
-		try {
-			this.wait();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		if ((fromQueue = queue.poll()) != null){
+			synchronized (fromQueue){
+				fromQueue.notify();
+			}
 		}
 	}
+
 }
 
