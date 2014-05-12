@@ -60,7 +60,6 @@ class MainFrame extends JFrame implements Runnable{
 	private JButton sendButton = new JButton("Send");
 
 	MainFrame(){
-
 		try {
 			port = Integer.valueOf(JOptionPane.showInputDialog(null,"Enter open port for your server"));
 
@@ -72,10 +71,8 @@ class MainFrame extends JFrame implements Runnable{
 		}
 
 		frameCalibration();
-
 		Thread serverThread = new Thread(new Server());
 		serverThread.start();
-
 	}
 
 	private void frameCalibration(){
@@ -215,7 +212,7 @@ class MainFrame extends JFrame implements Runnable{
 		}
 	}
 
-	public class Server implements Runnable{
+	class Server implements Runnable{
 
 		@Override
 		public void run() {
@@ -236,7 +233,7 @@ class MainFrame extends JFrame implements Runnable{
 		}
 	}
 
-	public class PortListener implements Runnable{
+	class PortListener implements Runnable{
 
 		@Override
 		public void run() {
