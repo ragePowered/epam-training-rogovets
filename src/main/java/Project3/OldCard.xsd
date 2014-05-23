@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    
+    <xs:element name="oldCardList">
+        <xs:complexType>
+            <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                <xs:element name="oldCard" type="oldCardType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:complexType name="oldCardType">
+        <xs:sequence>
+            <xs:element name="theme" type="xs:string"/>
+            <xs:element name="type" type="cardType"/>
+            <xs:element name="cuntry" type="country"/>
+            <xs:element name="year" type="year"/>
+            <xs:element name="author" type="authorList"/>
+            <xs:element name="valuable" type="valueType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:simpleType name="cardType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Вітання"/>
+            <xs:enumeration value="Реклама"/>
+            <xs:enumeration value="Звичайна"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="country">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="US"/>
+            <xs:enumeration value="UA"/>
+            <xs:enumeration value="EN"/>
+            <xs:enumeration value="FR"/>
+            <xs:enumeration value="TU"/>
+            <xs:enumeration value="IT"/>
+            <xs:enumeration value="BR"/>
+            <xs:enumeration value="BL"/>
+            <xs:enumeration value="CH"/>
+            <xs:enumeration value="JP"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="valueType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Історична ціність"/>
+            <xs:enumeration value="Колеційна цінність"/>
+            <xs:enumeration value="Тематична цінність"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="authorList">
+        <xs:list itemType="xs:string"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="year">
+        <xs:restriction base="xs:positiveInteger">
+            <xs:minInclusive value="1900"/>
+            <xs:maxInclusive value="2014"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+</xs:schema>
