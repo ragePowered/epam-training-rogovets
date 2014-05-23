@@ -31,12 +31,24 @@ import java.util.List;
 /**
  * Created with IntelliJ IDEA.
  * User: andrew
- * Date: 5/18/14
+ * Date: 5/17/14
  * Time: 4:54 PM
  */
 
 /**
+ * 1. Создать файл XML и соответствующую ему схему XSD.
+ * 2. При разработке XSD использовать простые и комплексные типы, перечисления, шаблоны и предельные значения, обязательно использование атрибутов и типа ID.
+ * 3. Сгенерировать (создать) Java-класс, соответствующий данному описанию.
+ * 4. Создать Java-приложение для разбора XML-документа и инициализации коллекции объектов информацией из XML-файла. Для разбора использовать SAX, DOM и StAX парсеры. Для сортировки объектов использовать интерфейс Comparator.
+ * 5. Произвести проверку XML-документа с привлечением XSD.
+ * 6. Определить метод, производящий преобразование разработанного XML-документа в документ, указанный в каждом задании.
  *
+ * Thema – тема изображения (городской пейзаж, природа, люди, религия, спорт, архитектура...).
+ * Type – тип открытки (поздравительная, рекламная, обычная).
+ * Country – страна производства.
+ * Year – год издания.
+ * Author – имя автора(ов).
+ * Valuable – историческая, коллекционная или тематическая ценность.
  */
 
 public class Main {
@@ -46,16 +58,9 @@ public class Main {
 	final static private String outPath = "src/main/java/Project3/OldCard.html";
 
 	private static OldCardList oldCardList = new OldCardList(new ArrayList<OldCardType>() {{
-		add(new OldCardType(Utils.pickTheme(), CardType.fromValue(Utils.pickCardType()), Country.fromValue(Utils.pickCountry()), Utils.pickYear(), Utils.generateAuthors(), ValueType.fromValue(Utils.pickValue())));
-		add(new OldCardType(Utils.pickTheme(), CardType.fromValue(Utils.pickCardType()), Country.fromValue(Utils.pickCountry()), Utils.pickYear(), Utils.generateAuthors(), ValueType.fromValue(Utils.pickValue())));
-		add(new OldCardType(Utils.pickTheme(), CardType.fromValue(Utils.pickCardType()), Country.fromValue(Utils.pickCountry()), Utils.pickYear(), Utils.generateAuthors(), ValueType.fromValue(Utils.pickValue())));
-		add(new OldCardType(Utils.pickTheme(), CardType.fromValue(Utils.pickCardType()), Country.fromValue(Utils.pickCountry()), Utils.pickYear(), Utils.generateAuthors(), ValueType.fromValue(Utils.pickValue())));
-		add(new OldCardType(Utils.pickTheme(), CardType.fromValue(Utils.pickCardType()), Country.fromValue(Utils.pickCountry()), Utils.pickYear(), Utils.generateAuthors(), ValueType.fromValue(Utils.pickValue())));
-		add(new OldCardType(Utils.pickTheme(), CardType.fromValue(Utils.pickCardType()), Country.fromValue(Utils.pickCountry()), Utils.pickYear(), Utils.generateAuthors(), ValueType.fromValue(Utils.pickValue())));
-		add(new OldCardType(Utils.pickTheme(), CardType.fromValue(Utils.pickCardType()), Country.fromValue(Utils.pickCountry()), Utils.pickYear(), Utils.generateAuthors(), ValueType.fromValue(Utils.pickValue())));
-		add(new OldCardType(Utils.pickTheme(), CardType.fromValue(Utils.pickCardType()), Country.fromValue(Utils.pickCountry()), Utils.pickYear(), Utils.generateAuthors(), ValueType.fromValue(Utils.pickValue())));
-		add(new OldCardType(Utils.pickTheme(), CardType.fromValue(Utils.pickCardType()), Country.fromValue(Utils.pickCountry()), Utils.pickYear(), Utils.generateAuthors(), ValueType.fromValue(Utils.pickValue())));
-		add(new OldCardType(Utils.pickTheme(), CardType.fromValue(Utils.pickCardType()), Country.fromValue(Utils.pickCountry()), Utils.pickYear(), Utils.generateAuthors(), ValueType.fromValue(Utils.pickValue())));
+		for (int i = 0; i < 12; i++) {
+			add(new OldCardType(Utils.pickTheme(), CardType.fromValue(Utils.pickCardType()), Country.fromValue(Utils.pickCountry()), Utils.pickYear(), Utils.generateAuthors(), ValueType.fromValue(Utils.pickValue())));
+		}
 	}});
 
 	public static void main(String[] args) {
