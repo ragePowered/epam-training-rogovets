@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<oldCardList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="OldCard.xsd">
+    <oldCard>
+        <theme>Корови</theme>
+        <type>Вітання</type>
+        <cuntry>FR</cuntry>
+        <year>1964</year>
+        <author>Я.Кириченко О.Безвіконний</author>
+        <valuable>Колеційна цінність</valuable>
+    </oldCard>
+    <oldCard>
+        <theme>Ведмеді</theme>
+        <type>Реклама</type>
+        <cuntry>JP</cuntry>
+        <year>1946</year>
+        <author>І.Пастушенко Н.Кольчіба Т.Дємідова</author>
+        <valuable>Тематична цінність</valuable>
+    </oldCard>
+    <oldCard>
+        <theme>Дюни</theme>
+        <type>Вітання</type>
+        <cuntry>UA</cuntry>
+        <year>1924</year>
+        <author>Л.Дорнер</author>
+        <valuable>Історична ціність</valuable>
+    </oldCard>
+    <oldCard>
+        <theme>Дисней</theme>
+        <type>Вітання</type>
+        <cuntry>IT</cuntry>
+        <year>1968</year>
+        <author>С.Вересоцький С.Давиденко Ю.Білановська</author>
+        <valuable>Тематична цінність</valuable>
+    </oldCard>
+    <oldCard>
+        <theme>Різдво</theme>
+        <type>Реклама</type>
+        <cuntry>UA</cuntry>
+        <year>1988</year>
+        <author>М.Крищанович В.Мазаєва П.Петрушко</author>
+        <valuable>Тематична цінність</valuable>
+    </oldCard>
+    <oldCard>
+        <theme>Мініатюри</theme>
+        <type>Реклама</type>
+        <cuntry>UA</cuntry>
+        <year>1991</year>
+        <author>В.Мазаєва О.Безвіконний А.Роговець</author>
+        <valuable>Тематична цінність</valuable>
+    </oldCard>
+    <oldCard>
+        <theme>Веслувальні човни</theme>
+        <type>Звичайна</type>
+        <cuntry>UA</cuntry>
+        <year>1946</year>
+        <author>О.Кухаренко А.Ярова</author>
+        <valuable>Тематична цінність</valuable>
+    </oldCard>
+    <oldCard>
+        <theme>Відомі особи</theme>
+        <type>Вітання</type>
+        <cuntry>BL</cuntry>
+        <year>2005</year>
+        <author>А.Гранатова А.Роговець</author>
+        <valuable>Тематична цінність</valuable>
+    </oldCard>
+    <oldCard>
+        <theme>Рись</theme>
+        <type>Реклама</type>
+        <cuntry>BR</cuntry>
+        <year>1988</year>
+        <author>М.Крищанович Ю.Білановська</author>
+        <valuable>Тематична цінність</valuable>
+    </oldCard>
+    <oldCard>
+        <theme>Статуї</theme>
+        <type>Вітання</type>
+        <cuntry>CH</cuntry>
+        <year>1934</year>
+        <author>С.Давиденко</author>
+        <valuable>Колеційна цінність</valuable>
+    </oldCard>
+</oldCardList>
