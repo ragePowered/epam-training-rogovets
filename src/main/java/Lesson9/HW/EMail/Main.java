@@ -12,13 +12,11 @@ import java.util.regex.Pattern;
 public class Main {
 	public static void main(String[] args) {
 		isEmail("andrew.rogovets@gmail.com");
-
-
-
+		isEmail("andrew.rogovets@gmail.com");
 	}
 
 	public static boolean isEmail(String email){
-		String emailPattern = "[A-Za-z0-9-\\+]+(\\.[A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})";
+		String emailPattern = "[A-Za-z0-9-][_A-Za-z0-9-]+(\\.*|_*)([A-Za-z0-9-][_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})";
 		boolean result = Pattern.compile(emailPattern).matcher(email).matches();
 		System.out.println(email + " --- " + result);
 		return result;
