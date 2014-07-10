@@ -16,7 +16,7 @@ public class Main {
 		isLeap("2400");
 		isLeap("400");
 		isLeap("3002");
-		isLeap("2001");
+		isLeap("2016");
 
 	}
 
